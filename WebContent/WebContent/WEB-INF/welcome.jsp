@@ -7,6 +7,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<style>
+table, td {
+    border:1px solid black;
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Gestión Reservas</title>
 <link rel="icon" href="http://getbootstrap.com/favicon.ico">
@@ -17,39 +22,33 @@
 <body>
 	
 	<h1>Bienvenido <%=((Persona)session.getAttribute("user")).getNombre() %></h1>
-	
-			<%
+	<h2>Mis reservas:</h2>
+		
+		<%	
 			CtrlReserva ctrlRes = new CtrlReserva();
-			ArrayList<Reserva>listaRes= ctrlRes.mostrarReservas(((Persona)session.getAttribute("user")).getId());
-			for(Reserva r : listaRes){ 
+			ArrayList<Reserva>listaRes = ctrlRes.mostrarReservas(((Persona)session.getAttribute("user")).getId());
+			for(Reserva r : listaRes){ 	
 		%>
 
-		<div class="container">
-  <div class="row">
-    <div class="col">
-      <%=r.getId() %>
-    </div>
-    <div class="col">
-      <%=r.getTipo().getNombreTipo() %>
-    </div>
-    <div class="col">
-      <%=r.getElemento().getIdElem() %>
-    </div>
-    <div class="col">
-      <%=r.getFechayhora() %>
-    </div>
-    <div class="col">
-      <%=r.getTiempoUso() %>
-    </div>
-    <div class="col">
-      <%=r.getDetalle() %>
-    </div>
-  </div>
-</div>
+<table>
+	<tr>
+     <td> <%=r.getId() %></td>
+     <td> <%=r.getTipo().getNombreTipo() %></td>
+     <td> <%=r.getElemento().getIdElem() %></td>
+    <td>  <%=r.getFechayhora() %></td>
+    <td>  <%=r.getTiempoUso() %></td>
+    <td>  <%=r.getDetalle() %></td>
+    </tr>
+</table>
+
 		<%
 			}
 		%>
+		
 
+		<form action="reservas" method="post">
+  		<button type="submit" formmethod="post" formaction="reservas">Agregar Reserva</button>
+		</form>
 
 
 </body>

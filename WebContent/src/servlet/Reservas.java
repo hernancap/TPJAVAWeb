@@ -27,7 +27,8 @@ public class Reservas extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("WEB-INF/eliminarReserva.jsp").forward(request, response);
 	}
 
 	/**
@@ -35,7 +36,10 @@ public class Reservas extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		//doGet(request, response);
+		request.getRequestDispatcher("WEB-INF/agregarReserva.jsp").forward(request, response);
+		//String nomTipo=request.getParameter("nomTipo");
+		
 	}
 
 	/**
@@ -49,7 +53,9 @@ public class Reservas extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
+		request.getRequestDispatcher("WEB-INF/eliminarReserva.jsp").forward(request, response);
+		
 	}
 
 }
