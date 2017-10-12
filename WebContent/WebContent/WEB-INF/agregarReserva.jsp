@@ -10,15 +10,23 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="icon" href="http://getbootstrap.com/favicon.ico">
 
     <link href="style/bootstrap.css" rel="stylesheet">
+    
+       
 
 <title>Agregar reserva</title>
 </head>
 <body>
+
+	<h2>Agregar reserva</h2>
+
 
 <form class="form-horizontal" name="agregarRes" action="reservas" method="post">
 
@@ -42,17 +50,21 @@
     </div>
   </div>
    <div class="form-group">
-    <label class="control-label col-sm-2" for="tiempoUso">Tiempo de uso:</label>
+    <label class="control-label col-sm-2" for="tiempoUso">Tiempo de reserva:</label>
     <div class="col-sm-10">
       <input class="form-control" id="tiempoUso">
     </div>
   </div>
+  
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <button type="submit" class="btn btn-default">Buscar elementos</button>
     </div>
   </div>
 </form>
+
+
+
 
 </body>
 </html>

@@ -37,7 +37,9 @@ public class Reservas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		request.getRequestDispatcher("WEB-INF/agregarReserva.jsp").forward(request, response);
+		//request.getRequestDispatcher("WEB-INF/agregarReserva.jsp").forward(request, response);
+		request.getRequestDispatcher("WEB-INF/prueba.jsp").forward(request, response);
+
 		//String nomTipo=request.getParameter("nomTipo");
 		
 	}
