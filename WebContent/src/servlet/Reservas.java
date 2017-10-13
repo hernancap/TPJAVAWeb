@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controlers.CtrlElemento;
+import controlers.CtrlPersona;
+import entity.Persona;
+
 /**
  * Servlet implementation class Reservas
  */
@@ -37,10 +41,34 @@ public class Reservas extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-		//request.getRequestDispatcher("WEB-INF/agregarReserva.jsp").forward(request, response);
-		request.getRequestDispatcher("WEB-INF/prueba.jsp").forward(request, response);
+		
+		if(request.getParameter("param").equals("welcome"))
+		{		request.getRequestDispatcher("WEB-INF/agregarReserva.jsp").forward(request, response);
+		
+		} else {
+		if(request.getParameter("param").equals("buscarElem")){
+			
+			String nomTipo=request.getParameter("nomTipo");
+			String fechaRes=request.getParameter("datetimepicker");
+			int tiempoUso= Integer.parseInt(request.getParameter("tiempoUso"));
+			String horaRes=request.getParameter("horaRes");
+			
+			String fechaSelec = (fechaRes+horaRes+":00");
+			
+			CtrlElemento ctrlElem = new CtrlElemento();
+			
+			
+			request.setAttribute("listaElementos", ctrlElem.buscarElemento(fechaSelec, nomTipo, tiempoUso));
+			
+			request.getRequestDispatcher("WEB-INF/buscarElem.jsp").forward(request, response);
+			
 
-		//String nomTipo=request.getParameter("nomTipo");
+			
+			
+		}}
+		//request.getRequestDispatcher("WEB-INF/prueba.jsp").forward(request, response);
+
+		
 		
 	}
 

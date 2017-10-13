@@ -45,9 +45,9 @@ table, td {
 			}
 		%>
 		
-
 		<form action="reservas" method="post">
-  		<button type="submit" formmethod="post" formaction="reservas">Agregar Reserva</button>
+
+  		<button type="submit" name="param" value="welcome" formmethod="post" formaction="reservas">Agregar Reserva</button>
 		</form>
 
 
