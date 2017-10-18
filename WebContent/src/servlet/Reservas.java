@@ -53,7 +53,7 @@ public class Reservas extends HttpServlet {
 			int tiempoUso= Integer.parseInt(request.getParameter("tiempoUso"));
 			String horaRes=request.getParameter("horaRes");
 			
-			String fechaSelec = (fechaRes+horaRes+":00");
+			String fechaSelec = (fechaRes+" "+horaRes+":00");
 			
 			CtrlElemento ctrlElem = new CtrlElemento();
 			
