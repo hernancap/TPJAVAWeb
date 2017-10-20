@@ -10,6 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="reservas" method="post">
 
 <table>
 		<%
@@ -17,12 +18,23 @@
 			for(Elemento e : listaElem){
 		%>
 		<tr>
+		
+		
 			<td><%=e.getNombre() %></td>
+			<td><div class="form-group">
+			
+			<input type="radio" name="idElem" value=<%=e.getIdElem() %>><br>
+			
+			</div></td>
+			
 		</tr>
 		<%
 			}
 		%>
+
 </table>
+<button type="submit" name="param" value="nuevaRes" formmethod="post" formaction="reservas" class="btn btn-default">Reservar</button>
+</form>
 
 </body>
 </html>

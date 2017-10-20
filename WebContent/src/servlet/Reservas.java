@@ -6,10 +6,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import controlers.CtrlElemento;
 import controlers.CtrlPersona;
+import controlers.CtrlReserva;
+import entity.Elemento;
 import entity.Persona;
+import entity.Reserva;
+import entity.TipoElemento;
 
 /**
  * Servlet implementation class Reservas
@@ -17,6 +22,8 @@ import entity.Persona;
 @WebServlet({ "/Reservas", "/reservas", "/reserva", "/Reserva" })
 public class Reservas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	Reserva nuevaRes = new Reserva();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -63,9 +70,40 @@ public class Reservas extends HttpServlet {
 			request.getRequestDispatcher("WEB-INF/buscarElem.jsp").forward(request, response);
 			
 
+			Persona pers = (Persona) request.getSession().getAttribute("user");
 			
 			
-		}}
+			//nuevaRes.setDetalle(textDet);				
+			nuevaRes.setFechayhora(fechaSelec);
+			nuevaRes.setTiempoUso(tiempoUso);
+			nuevaRes.setTipo(new TipoElemento());
+			nuevaRes.getTipo().setNombreTipo(nomTipo);
+			nuevaRes.setPersona(new Persona());
+			nuevaRes.getPersona().setId(pers.getId());
+			
+
+			
+			
+		}else {
+			if(request.getParameter("param").equals("nuevaRes")){
+			
+				int idElem = Integer.parseInt(request.getParameter("idElem"));
+				
+				nuevaRes.setElemento(new Elemento());
+				nuevaRes.getElemento().setIdElem(idElem);
+
+				CtrlReserva ctrlRes = new CtrlReserva();
+				
+				
+				ctrlRes.nuevaReserva(nuevaRes);
+				
+				
+				
+			}
+			}
+		
+		
+		}
 		//request.getRequestDispatcher("WEB-INF/prueba.jsp").forward(request, response);
 
 		
