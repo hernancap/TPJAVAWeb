@@ -49,7 +49,12 @@ public class Start extends HttpServlet {
 			
 			request.getSession().setAttribute("user", pers);
 			
-			request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response);
+			if (pers.getCategoria().equalsIgnoreCase("admin")){
+				
+				request.getRequestDispatcher("WEB-INF/menuAdmin.jsp").forward(request, response);
+			} else {
+			
+			request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response); }
 			//response.getWriter().append(user).append(" ").append(pass);
 			
 			

@@ -129,14 +129,7 @@ public class Reservas extends HttpServlet {
 	 * @see HttpServlet#doDelete(HttpServletRequest, HttpServletResponse)
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		int idRes = Integer.parseInt(request.getParameter("idRes"));
-		
-		CtrlReserva ctrlRes = new CtrlReserva();
-		
-		ctrlRes.eliminarRes(idRes);
-		
-		request.getRequestDispatcher("WEB-INF/eliminarReserva.jsp").forward(request, response);
+
 		
 		
 	}
