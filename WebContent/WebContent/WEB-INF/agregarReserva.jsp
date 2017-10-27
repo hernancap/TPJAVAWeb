@@ -53,10 +53,23 @@
 </head>
 <body>
 
-	<h2>Agregar reserva</h2>
+<div class="container">
+
+	<h1>Agregar reserva</h1>
 
 
-<form class="form-horizontal" name="agregarRes" action="reservas" method="post">
+<form class="form-horizontal" name="agregarRes" action="reservas" method="post" onsubmit="return checkvalue(this)">
+<script type="text/javascript">
+function checkvalue() { 
+    var mystring = document.getElementById('tiempoUso').value;
+    if(!mystring.match(/\S/) || document.getElementById("nomTipo").selectedIndex == 0 || document.getElementById("horaRes").selectedIndex == 0) {
+        alert ("Complete todos los campos");
+        return false;
+    } else {
+        return true;
+    }
+}
+</script>
 
 <div class="form-group">
     <label class="control-label col-sm-2" for="nomTipo">Nombre Tipo:</label>
@@ -134,14 +147,17 @@
 	</select>
     </div>
   </div>
+  
         
   
 <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" name="param" value="buscarElem" formmethod="post" formaction="reservas" class="btn btn-default">Buscar elementos</button>
+      <button type="submit" name="param" value="buscarElem" formmethod="post" formaction="reservas" class="btn btn-primary">Buscar elementos</button>
     </div>
   </div>
 </form>
+
+</div>
 
 </body>
 </html>

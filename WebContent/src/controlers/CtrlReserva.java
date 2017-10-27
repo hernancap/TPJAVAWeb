@@ -163,7 +163,7 @@ public class CtrlReserva {
 }
 	
 	
-	public void eliminarRes(Reserva reserva){
+	public void eliminarRes(int ID){
 
 	
 		
@@ -176,7 +176,7 @@ public class CtrlReserva {
 						"delete from reservas where idreservas = ?"
 
 						);
-			stmt.setInt(1, reserva.getId());
+			stmt.setInt(1, ID);
 			stmt.executeUpdate();				
 				
 			} catch (SQLException e) {
