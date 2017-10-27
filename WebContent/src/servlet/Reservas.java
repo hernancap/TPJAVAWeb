@@ -102,7 +102,7 @@ public class Reservas extends HttpServlet {
 				
 				ctrlRes.nuevaReserva(nuevaRes);
 				
-				
+				request.getRequestDispatcher("WEB-INF/confirmarReserva.jsp").forward(request, response);
 				
 			}
 

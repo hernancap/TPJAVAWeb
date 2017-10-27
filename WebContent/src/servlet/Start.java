@@ -29,7 +29,18 @@ public class Start extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+				
+		Persona p = new Persona();
+		
+		p = (Persona) request.getSession().getAttribute("user");
+		
+		if (p.getCategoria().equalsIgnoreCase("admin")){
+			
+			request.getRequestDispatcher("WEB-INF/menuAdmin.jsp").forward(request, response);
+		} else {
+		
+		request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response); }
 	}
 
 	/**
@@ -45,7 +56,7 @@ public class Start extends HttpServlet {
 			
 			Persona pers=ctrl.login(user, pass);
 			
-			request.setAttribute("listaPersonas", ctrl.mostrarPersona());
+			//request.setAttribute("listaPersonas", ctrl.mostrarPersona());
 			
 			request.getSession().setAttribute("user", pers);
 			
