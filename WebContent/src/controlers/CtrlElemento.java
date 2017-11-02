@@ -128,7 +128,7 @@ private ArrayList<Elemento> elem;
 		
 	}
 
-	public void eliminarElem(Elemento elem2) {
+	public void eliminarElem(int idElem) {
 
 	
 		
@@ -141,7 +141,7 @@ private ArrayList<Elemento> elem;
 						"delete from elementos where idelemento = ?"
 
 						);
-			stmt.setInt(1, elem2.getIdElem());
+			stmt.setInt(1, idElem);
 			stmt.executeUpdate();				
 				
 			} catch (SQLException e) {

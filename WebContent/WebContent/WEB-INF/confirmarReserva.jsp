@@ -10,6 +10,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>Confirmación Reserva</title>
+<style>
+body {
+    margin: 50px 50px ;
+}
+</style>
 </head>
 <body>
 
@@ -18,5 +23,10 @@
     <strong>¡Listo!</strong> La reserva fué realizada con éxito.
   </div>
 </div>
+
+<form action="start" method="get">
+
+  		<button type="submit" formmethod="get" formaction="start" class="btn btn-info">Volver</button>
+		</form>
 </body>
 </html>

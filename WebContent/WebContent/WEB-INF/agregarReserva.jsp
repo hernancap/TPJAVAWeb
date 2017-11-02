@@ -148,6 +148,13 @@ function checkvalue() {
     </div>
   </div>
   
+  <div class="form-group">
+    <label class="control-label col-sm-2" for="detalle">Detalle:</label>
+    <div class="col-sm-10">
+     <textarea class="form-control" rows="3" id="detalle" name="detalle"></textarea>
+    </div>
+  </div>
+  
         
   
 <div class="form-group">
@@ -158,6 +165,8 @@ function checkvalue() {
 </form>
 
 </div>
+
+
 
 </body>
 </html>

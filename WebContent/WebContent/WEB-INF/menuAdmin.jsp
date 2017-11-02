@@ -29,6 +29,7 @@
 </nav>
 
 <jsp:include page="welcome.jsp" />
+<jsp:include page="footer.jsp" />
 
 </body>
 </html>

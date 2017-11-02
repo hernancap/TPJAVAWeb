@@ -64,7 +64,7 @@ public class Reservas extends HttpServlet {
 			String fechaRes=request.getParameter("datetimepicker");
 			int tiempoUso= Integer.parseInt(request.getParameter("tiempoUso"));
 			String horaRes=request.getParameter("horaRes");
-			
+						
 			String fechaSelec = (fechaRes+" "+horaRes+":00");
 			
 			CtrlElemento ctrlElem = new CtrlElemento();
@@ -77,6 +77,8 @@ public class Reservas extends HttpServlet {
 
 			Persona pers = (Persona) request.getSession().getAttribute("user");
 			
+			String detalle =request.getParameter("detalle");
+			
 			
 			//nuevaRes.setDetalle(textDet);				
 			nuevaRes.setFechayhora(fechaSelec);
@@ -85,6 +87,7 @@ public class Reservas extends HttpServlet {
 			nuevaRes.getTipo().setNombreTipo(nomTipo);
 			nuevaRes.setPersona(new Persona());
 			nuevaRes.getPersona().setId(pers.getId());
+			nuevaRes.setDetalle(detalle);
 			
 
 			

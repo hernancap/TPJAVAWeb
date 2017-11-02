@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controlers.CtrlReserva;
+import entity.Persona;
+
 /**
  * Servlet implementation class GestionReservas
  */
@@ -29,16 +32,54 @@ public class GestionReservas extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
-		request.getRequestDispatcher("WEB-INF/gestionReservas.jsp").forward(request, response);
+		Persona p = new Persona();
+		
+		p = (Persona) request.getSession().getAttribute("user");
+		
+		if (p.getCategoria().equalsIgnoreCase("admin")){
+			
+			request.getRequestDispatcher("WEB-INF/gestionReservas.jsp").forward(request, response);
+		} else {
+		
+		request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response); }
+		
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		switch (request.getParameter("param")) {
+		case "baja":
+			this.baja(request,response);
+			break;
+		default:
+			this.error(request,response);
+			break;
+		}
 	}
+
+	private void error(HttpServletRequest request, HttpServletResponse response) {
+		response.setStatus(404);
+		//redirigir a página de error
+	}
+	private void baja(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through post");
+int idRes = Integer.parseInt(request.getParameter("idRes"));
+		
+		CtrlReserva ctrlRes = new CtrlReserva();
+		
+		ctrlRes.eliminarRes(idRes);
+		
+		try {
+			request.getRequestDispatcher("WEB-INF/eliminarReserva.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
+	}
+	
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)

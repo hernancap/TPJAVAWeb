@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controlers.CtrlElemento;
+import controlers.CtrlReserva;
+import entity.Persona;
+
 /**
  * Servlet implementation class Elementos
  */
@@ -27,9 +31,18 @@ public class Elementos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		Persona p = new Persona();
 		
-		request.getRequestDispatcher("WEB-INF/gestionElementos.jsp").forward(request, response);
+		p = (Persona) request.getSession().getAttribute("user");
+		
+		if (p.getCategoria().equalsIgnoreCase("admin")){
+			
+			request.getRequestDispatcher("WEB-INF/gestionElementos.jsp").forward(request, response);
+		} else {
+		
+		request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response); }
+		
+		
 	}
 
 	/**
@@ -37,8 +50,62 @@ public class Elementos extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		switch (request.getParameter("param")) {
+		case "alta":
+			this.alta(request,response);
+			break;
+			
+		case "baja":
+			this.baja(request,response);
+			break;
+			
+		case "/modificacion":
+			this.modificacion(request,response);
+			break;
+		default:
+			this.error(request,response);
+			break;
+		}
 	}
+
+	private void error(HttpServletRequest request, HttpServletResponse response) {
+		response.setStatus(404);
+		//redirigir a página de error
+	}
+
+	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through post");
+		//crear el controlador y ejecutar el modificar/update
+	}
+
+	private void baja(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through post");
+		
+		int idElem = Integer.parseInt(request.getParameter("idElem"));
+		
+		CtrlElemento ctrlElem = new CtrlElemento();
+		
+		ctrlElem.eliminarElem(idElem);
+		
+		try {
+			request.getRequestDispatcher("WEB-INF/eliminarReserva.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	private void alta(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//response.getWriter().append("Alta, requested action: ").append(request.getPathInfo()).append(" through post");
+		
+		try {
+			request.getRequestDispatcher("WEB-INF/altaElem.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
 
 	/**
 	 * @see HttpServlet#doPut(HttpServletRequest, HttpServletResponse)
