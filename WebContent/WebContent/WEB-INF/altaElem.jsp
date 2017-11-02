@@ -14,24 +14,5 @@
 
 
 
-
-
-
-
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> branch 'master' of https://github.com/hernancap/TPJAVAWeb.git
-=======
-
-
-
-
->>>>>>> branch 'master' of https://github.com/hernancap/TPJAVAWeb.git
 </body>
 </html>
