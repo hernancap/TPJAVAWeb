@@ -2,6 +2,9 @@
 <%@page import="entity.Reserva"%>
 <%@page import="entity.Persona"%>
 <%@page import="controlers.CtrlReserva"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.DateFormat"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -50,6 +53,22 @@ table, td {
 		<%	
 			CtrlReserva ctrlRes = new CtrlReserva();
 			ArrayList<Reserva>listaRes = ctrlRes.mostrarReservas(((Persona)session.getAttribute("user")).getId());
+			
+			for (int x = 0; x < listaRes.size(); x++ )
+			{
+				
+				Date date = new Date();
+				String fechaRes = listaRes.get(x).getFechayhora();
+				DateFormat hourdateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String fechaActual = hourdateFormat.format(date);
+				if( fechaRes.compareTo(fechaActual) < 0 )
+				{
+					listaRes.remove(x);
+				}
+					
+					
+			}
+	
 			for(Reserva r : listaRes){ 	
 		%>
 	

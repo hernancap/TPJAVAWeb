@@ -20,7 +20,7 @@ body {
 
 <div class="container">
 <div class="alert alert-success">
-    <strong>¡Listo!</strong> La reserva fué eliminada con éxito.
+    <strong>¡Listo!</strong> La baja fué realizada con éxito.
   </div>
 </div>
 

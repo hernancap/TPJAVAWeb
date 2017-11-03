@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import data.Conexion;
+import entity.Elemento;
 import entity.Persona;
 import entity.TipoElemento;
 
@@ -111,7 +112,7 @@ public class CtrlTipoElem {
 	    return TimeUnit.MILLISECONDS.toDays(Math.abs(end - start));
 	}
 
-	public void eliminarTipo(TipoElemento tip) {
+	public void eliminarTipo(int idTipo) {
 
 	
 		
@@ -124,7 +125,7 @@ public class CtrlTipoElem {
 						"delete from tipos where idtipo = ?"
 
 						);
-			stmt.setInt(1, tip.getIdTipo());
+			stmt.setInt(1, idTipo);
 			stmt.executeUpdate();				
 				
 			} catch (SQLException e) {
@@ -215,6 +216,47 @@ public class CtrlTipoElem {
 	
     
 	
+		
+	}
+	
+	public TipoElemento buscarTipo(int id) {
+		
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		TipoElemento te = new TipoElemento();
+		te.setIdTipo(id);
+		try {
+			stmt=Conexion.getInstancia().getConn().prepareStatement("select * from tipos where idtipo=?");
+			stmt.setInt(1, id);
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()){
+			te.setIdTipo(rs.getInt("idtipo"));
+			te.setCantMaxRes(rs.getInt("cantMaxRes"));
+			te.setNombreTipo(rs.getString("nombre"));
+			te.setMaxDiasAnticip(rs.getInt("maxDiasAnticip"));
+			te.setSoloEncarg(rs.getInt("soloEncarg"));
+			te.setHorasMax(rs.getInt("horasMax"));
+						
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			if(rs!=null)rs.close();
+			if(stmt!=null)stmt.close();
+			Conexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		  }
+		
+		
+		return te;
+
+
+		
+		
 		
 	}
 	

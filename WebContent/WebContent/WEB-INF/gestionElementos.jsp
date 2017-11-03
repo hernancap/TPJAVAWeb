@@ -72,7 +72,19 @@ table, td {
 
   		<button type="submit" name="param" value="baja" formmethod="post" formaction="elementos" class="btn btn-primary">Eliminar Elemento</button>
 		
-				</div>
+</div>
+
+<div class="col-sm-2">
+
+
+
+  		<button type="submit" name="param" value="modifElem" formmethod="post" formaction="elementos" class="btn btn-primary">Editar Elemento</button>
+		
+</div>
+
+
+
+
 <script>
 function myFunction() {
     var radios = document.getElementsByName("idElem");
@@ -83,7 +95,7 @@ function myFunction() {
             ID = radios[i].value;
         }
     }
-    if (ID == null) { alert ("Seleccione el elemento a eliminar");
+    if (ID == null) { alert ("Seleccione un elemento");
     						 return false;} else {
     return true;; }
 }
@@ -92,7 +104,7 @@ function myFunction() {
 </form>
 
 
-		<div class="col-sm-10">
+		<div class="col-sm-8">
 		<form action="elementos" method="post">
 
   		<button type="submit" name="param" value="alta" formmethod="post" formaction="elementos" class="btn btn-primary">Agregar Elemento</button>

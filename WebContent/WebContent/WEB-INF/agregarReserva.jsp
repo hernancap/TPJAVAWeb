@@ -72,7 +72,7 @@ function checkvalue() {
 </script>
 
 <div class="form-group">
-    <label class="control-label col-sm-2" for="nomTipo">Nombre Tipo:</label>
+    <label class="control-label col-sm-2" for="nomTipo">Tipo de elemento:</label>
     <div class="col-sm-10">
     <select id="nomTipo" name="nomTipo">   
     <option value="none"></option> 	

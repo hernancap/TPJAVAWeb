@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controlers.CtrlTipoElem;
+import entity.Persona;
+import entity.TipoElemento;
+
 /**
  * Servlet implementation class Tipos
  */
@@ -27,9 +31,18 @@ public class Tipos extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		Persona p = new Persona();
 		
-		request.getRequestDispatcher("WEB-INF/gestionTipos.jsp").forward(request, response);
+		p = (Persona) request.getSession().getAttribute("user");
+		
+		if (p.getCategoria().equalsIgnoreCase("admin")){
+			
+			request.getRequestDispatcher("WEB-INF/gestionElementos.jsp").forward(request, response);
+		} else {
+		
+		request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response); }
+		
+		
 	}
 
 	/**
@@ -38,22 +51,67 @@ public class Tipos extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		switch (request.getParameter("param")) {
-		case "/alta":
-			this.alta(request,response);
+		case "alta":
+			
+			TipoElemento te = new TipoElemento();
+			
+			te.setIdTipo(0);
+
+			request.setAttribute("tipo", te);
+
+			request.getRequestDispatcher("WEB-INF/altaTipo.jsp").forward(request, response);
+
 			break;
 			
 		case "baja":
 			this.baja(request,response);
 			break;
 			
-		case "/modificacion":
+		case "modifTipo":
 			this.modificacion(request,response);
 			break;
+		case "agregarTipo":
+			TipoElemento nuevoTipo = new TipoElemento();
+			String nombre = request.getParameter("nombre");
+			int idTipo = Integer.parseInt(request.getParameter("idTipo"));
+			int cantMaxRes = Integer.parseInt(request.getParameter("cantMaxRes"));
+			int horasMax = Integer.parseInt(request.getParameter("horasMax"));
+			int diasAntic = Integer.parseInt(request.getParameter("diasAntic"));
+			int soloEncarg;
 			
-		case "/consulta":
-			this.consulta(request,response);
+			 if (request.getParameter("soloEncarg").equals("true")){
+				 
+				 soloEncarg  = 1;
+			 } else {
+				 
+				 soloEncarg  = 0;
+			 }
+			
+			boolean editar;
+			
+			 if (request.getParameter("editar").equals("true")){
+				 
+				editar  = true;
+			 } else {
+				 
+				 editar  = false;
+			 }
+			
+		
+			CtrlTipoElem ctrlTipo = new CtrlTipoElem();
+			
+			nuevoTipo.setNombreTipo(nombre);
+			nuevoTipo.setIdTipo(idTipo);
+			nuevoTipo.setCantMaxRes(cantMaxRes);
+			nuevoTipo.setHorasMax(horasMax);
+			nuevoTipo.setMaxDiasAnticip(diasAntic);
+			nuevoTipo.setSoloEncarg(soloEncarg);
+			
+			ctrlTipo.nuevoTipo(nuevoTipo, editar);
+			
+			request.getRequestDispatcher("WEB-INF/confirmarReserva.jsp").forward(request, response);
+			
 			break;
-
 		default:
 			this.error(request,response);
 			break;
@@ -65,25 +123,58 @@ public class Tipos extends HttpServlet {
 		//redirigir a página de error
 	}
 
-	private void consulta(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getWriter().append("Consulta, requested action: ").append(request.getPathInfo()).append(" through post");
-		//crear el controlador y ejecutar el getOne o getById
-	}
-
 	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through post");
-		//crear el controlador y ejecutar el modificar/update
+		//response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through post");
+		
+		int idTipo = Integer.parseInt(request.getParameter("idTipo"));
+		
+		CtrlTipoElem ctrlTipo = new CtrlTipoElem();
+		
+		TipoElemento te = new TipoElemento();
+		
+		te = ctrlTipo.buscarTipo(idTipo); 
+		
+		request.setAttribute("tipo", te);
+		
+		try {
+			request.getRequestDispatcher("WEB-INF/altaTipo.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void baja(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through post");
-		//crear el controlador y ejecutar el delete/remove
+		//response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through post");
+		
+		int idTipo = Integer.parseInt(request.getParameter("idTipo"));
+		
+		CtrlTipoElem ctrlTipo = new CtrlTipoElem();
+		
+		ctrlTipo.eliminarTipo(idTipo);
+		
+		try {
+			request.getRequestDispatcher("WEB-INF/eliminarReserva.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
-	private void alta(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getWriter().append("Alta, requested action: ").append(request.getPathInfo()).append(" through post");
-		//crear el controlador y ejecutar el new/add
-	}
+/*	private void alta(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//response.getWriter().append("Alta, requested action: ").append(request.getPathInfo()).append(" through post");
+		
+
+		
+	}*/
+	
+/*	private void agregarElem(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//response.getWriter().append("Alta, requested action: ").append(request.getPathInfo()).append(" through post");
+		
+
+		
+		
+		
+	}*/
 	
 
 	/**

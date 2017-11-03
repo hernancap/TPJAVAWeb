@@ -235,5 +235,43 @@ private ArrayList<Elemento> elem;
 		
 		
 	}
+	
+	public Elemento buscarElem(int id) {
+		
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Elemento el = new Elemento();
+		el.setIdElem(id);
+		try {
+			stmt=Conexion.getInstancia().getConn().prepareStatement("select * from elementos where idelemento=?");
+			stmt.setInt(1, id);
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()){
+			el.setNombre(rs.getString("nombre"));
+			el.setTipo(new TipoElemento());
+			el.getTipo().setNombreTipo(rs.getString("tipoElem"));
+						
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			if(rs!=null)rs.close();
+			if(stmt!=null)stmt.close();
+			Conexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		  }
+		
+		
+		return el;
+
+
+		
+		
+		
+	}
 
 }
