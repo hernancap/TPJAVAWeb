@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import controlers.CtrlPersona;
+import entity.Persona;
+
 /**
  * Servlet implementation class Usuarios
  */
@@ -27,9 +30,18 @@ public class Usuarios extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		Persona p = new Persona();
 		
-		request.getRequestDispatcher("WEB-INF/gestionUsuarios.jsp").forward(request, response);
+		p = (Persona) request.getSession().getAttribute("user");
+		
+		if (p.getCategoria().equalsIgnoreCase("admin")){
+			
+			request.getRequestDispatcher("WEB-INF/gestionUsuarios.jsp").forward(request, response);
+		} else {
+		
+		request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response); }
+		
+		
 	}
 
 	/**
@@ -38,22 +50,83 @@ public class Usuarios extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		switch (request.getParameter("param")) {
-		case "/alta":
-			this.alta(request,response);
+		case "alta":
+			
+			Persona pe = new Persona();
+			
+			pe.setId(0);
+			
+
+			request.setAttribute("persona", pe);
+
+			request.getRequestDispatcher("WEB-INF/altaUsuarios.jsp").forward(request, response);
+
 			break;
 			
 		case "baja":
 			this.baja(request,response);
 			break;
 			
-		case "/modificacion":
+		case "modifPer":
 			this.modificacion(request,response);
 			break;
+		case "agregarPer":
+			Persona nuevaPer = new Persona();
+			String dni = request.getParameter("dni");
+			String nombre = request.getParameter("nombre");
+			String apellido = request.getParameter("apellido");
+			String usu = request.getParameter("usu");
+			String pass = request.getParameter("pass");
+			String categ = request.getParameter("categ");
+			int habilitado;
 			
-		case "/consulta":
-			this.consulta(request,response);
+			int idPer;
+						
+			if (request.getParameter("idPer") == null){
+				
+				idPer = 0;
+			} else {
+				
+				idPer = Integer.parseInt(request.getParameter("idPer"));
+			}
+			
+			
+			 if (request.getParameter("habilitado").equals("true")){
+				 
+				 habilitado  = 1;
+			 } else {
+				 
+				 habilitado  = 0;
+			 }
+			
+			boolean editar;
+			
+			 if (request.getParameter("editar").equals("true")){
+				 
+				editar  = true;
+			 } else {
+				 
+				 editar  = false;
+			 }
+			
+		
+			CtrlPersona ctrlPer = new CtrlPersona();
+			
+			nuevaPer.setApellido(apellido);
+			nuevaPer.setCategoria(categ);
+			nuevaPer.setContraseña(pass);
+			nuevaPer.setDni(dni);
+			nuevaPer.setHabilitado(habilitado);
+			nuevaPer.setId(idPer);
+			nuevaPer.setNombre(nombre);
+			nuevaPer.setUsuario(usu);
+			
+			
+			ctrlPer.nuevaPersona(nuevaPer, editar);
+			
+			request.getRequestDispatcher("WEB-INF/confirmarReserva.jsp").forward(request, response);
+			
 			break;
-
 		default:
 			this.error(request,response);
 			break;
@@ -65,27 +138,58 @@ public class Usuarios extends HttpServlet {
 		//redirigir a página de error
 	}
 
-	private void consulta(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getWriter().append("Consulta, requested action: ").append(request.getPathInfo()).append(" through post");
-		//crear el controlador y ejecutar el getOne o getById
-	}
-
 	private void modificacion(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through post");
-		//crear el controlador y ejecutar el modificar/update
+		//response.getWriter().append("Modificación, requested action: ").append(request.getPathInfo()).append(" through post");
+		
+		int idPer = Integer.parseInt(request.getParameter("idPer"));
+		
+		CtrlPersona ctrlPer = new CtrlPersona();
+		
+		Persona per = new Persona();
+		
+		per = ctrlPer.buscarPer(idPer); 
+		
+		request.setAttribute("persona", per);
+		
+		try {
+			request.getRequestDispatcher("WEB-INF/altaUsuarios.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private void baja(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through post");
-		//crear el controlador y ejecutar el delete/remove
+		//response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through post");
+		
+		int idPer = Integer.parseInt(request.getParameter("idPer"));
+		
+		CtrlPersona ctrlPer = new CtrlPersona();
+		
+		ctrlPer.eliminarPer(idPer);
+		
+		try {
+			request.getRequestDispatcher("WEB-INF/eliminarReserva.jsp").forward(request, response);
+		} catch (ServletException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
-	private void alta(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getWriter().append("Alta, requested action: ").append(request.getPathInfo()).append(" through post");
-		//crear el controlador y ejecutar el new/add
-	}
+/*	private void alta(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//response.getWriter().append("Alta, requested action: ").append(request.getPathInfo()).append(" through post");
+		
+
+		
+	}*/
+	
+/*	private void agregarElem(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		//response.getWriter().append("Alta, requested action: ").append(request.getPathInfo()).append(" through post");
+		
+
 		
 		
+		
+	}*/
 	
 
 	/**

@@ -37,7 +37,7 @@ public class Tipos extends HttpServlet {
 		
 		if (p.getCategoria().equalsIgnoreCase("admin")){
 			
-			request.getRequestDispatcher("WEB-INF/gestionElementos.jsp").forward(request, response);
+			request.getRequestDispatcher("WEB-INF/gestionTipos.jsp").forward(request, response);
 		} else {
 		
 		request.getRequestDispatcher("WEB-INF/welcome.jsp").forward(request, response); }
@@ -56,6 +56,7 @@ public class Tipos extends HttpServlet {
 			TipoElemento te = new TipoElemento();
 			
 			te.setIdTipo(0);
+			
 
 			request.setAttribute("tipo", te);
 
@@ -73,7 +74,16 @@ public class Tipos extends HttpServlet {
 		case "agregarTipo":
 			TipoElemento nuevoTipo = new TipoElemento();
 			String nombre = request.getParameter("nombre");
-			int idTipo = Integer.parseInt(request.getParameter("idTipo"));
+			int idTipo;
+						
+			if (request.getParameter("idTipo") == null){
+				
+				idTipo = 0;
+			} else {
+				
+				idTipo = Integer.parseInt(request.getParameter("idTipo"));
+			}
+			
 			int cantMaxRes = Integer.parseInt(request.getParameter("cantMaxRes"));
 			int horasMax = Integer.parseInt(request.getParameter("horasMax"));
 			int diasAntic = Integer.parseInt(request.getParameter("diasAntic"));

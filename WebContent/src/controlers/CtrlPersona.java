@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import data.Conexion;
 import entity.Persona;
 import entity.Reserva;
+import entity.TipoElemento;
 
 public class CtrlPersona {
 	
@@ -85,7 +86,7 @@ public class CtrlPersona {
 		return pers;
 	}
 	
-	public void eliminarPer(Persona usuario){
+	public void eliminarPer(int idPer){
 
 	
 		
@@ -98,7 +99,7 @@ public class CtrlPersona {
 						"delete from personas where idpersona = ?"
 
 						);
-			stmt.setInt(1, usuario.getId());
+			stmt.setInt(1, idPer);
 			stmt.executeUpdate();				
 				
 			} catch (SQLException e) {
@@ -249,6 +250,49 @@ public class CtrlPersona {
 		else {return null;}
 		
 	}  
+	
+	public Persona buscarPer(int id) {
+		
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		Persona p = new Persona();
+		p.setId(id);;
+		try {
+			stmt=Conexion.getInstancia().getConn().prepareStatement("select * from personas where idpersona=?");
+			stmt.setInt(1, id);
+			rs=stmt.executeQuery();
+			if(rs!=null && rs.next()){
+				p.setId(rs.getInt("idpersona"));
+				p.setNombre(rs.getString("nombre"));
+				p.setApellido(rs.getString("apellido"));
+				p.setDni(rs.getString("dni"));
+				p.setHabilitado(rs.getInt("habilitado"));
+				p.setUsuario(rs.getString("usuario"));
+				p.setContraseña(rs.getString("contraseña"));
+				p.setCategoria(rs.getString("categoria"));
+						
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			if(rs!=null)rs.close();
+			if(stmt!=null)stmt.close();
+			Conexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		  }
+		
+		
+		return p;
+
+
+		
+		
+		
+	}
 
 
 

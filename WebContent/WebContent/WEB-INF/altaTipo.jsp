@@ -16,6 +16,13 @@ body {
 }
 </style>
 
+<link rel="icon" href="http://getbootstrap.com/favicon.ico">
+    <!-- Bootstrap core CSS -->
+    <link href="style/bootstrap-grid.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 
@@ -50,6 +57,7 @@ function checkvalue() {
 		
 		<input type="hidden" name="editar" id="editar" value="<%=true%>" />
 		<input type="hidden" name="idTipo" id="idTipo" value="<%=te.getIdTipo()%>" />
+		
 		
 	<%
     } else { 
@@ -100,16 +108,16 @@ function checkvalue() {
     
         <%	
    		 } else { 
-   	%>
-    
+   			 
+   			%>	 
+   			 
     <input type="text" id="cantMaxRes" name="cantMaxRes" onkeypress='return event.charCode >= 48 && event.charCode <= 57'>
     
         <%	
    		 } 
-    %>
     
-    
-     
+         %>
+ 
     </div>
   </div>
   
