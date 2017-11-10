@@ -256,7 +256,7 @@ function checkvalue() {
     
     <option value="admin">Administrador</option>
     <option value="usuario">Usuario</option>
-    <option value="encarg">Encargado</option>
+    <option value="encargado">Encargado</option>
     
     
         <%	
@@ -266,7 +266,7 @@ function checkvalue() {
     		    
     		    <option value="usuario">Usuario</option>
     		    <option value="admin">Administrador</option>
-    		    <option value="encarg">Encargado</option>
+    		    <option value="encargado">Encargado</option>
     		    
     		        <%	
     		
@@ -274,7 +274,7 @@ function checkvalue() {
     		
     		%>
 		    
-		    <option value="encarg">Encargado</option>
+		    <option value="encargado">Encargado</option>
 		    <option value="admin">Administrador</option>
 		    <option value="usuario">Usuario</option>
 		    		    

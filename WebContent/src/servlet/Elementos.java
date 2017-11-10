@@ -76,7 +76,18 @@ public class Elementos extends HttpServlet {
 			Elemento nuevoElem = new Elemento();
 			String nomTipo = request.getParameter("nomTipo");
 			String nombre = request.getParameter("nombre");
-			int idElem = Integer.parseInt(request.getParameter("idElem"));
+			int idElem;
+			
+			if (request.getParameter("idElem") == null){
+				
+				idElem = 0;
+			} else {
+				
+				idElem = Integer.parseInt(request.getParameter("idElem"));
+			}
+			
+			
+			 
 			
 			boolean editar;
 			
