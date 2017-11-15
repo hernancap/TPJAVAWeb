@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import controlers.CtrlElemento;
 import controlers.CtrlPersona;
 import controlers.CtrlReserva;
+import controlers.CtrlTipoElem;
 import entity.Elemento;
 import entity.Persona;
 import entity.Reserva;
@@ -68,26 +69,65 @@ public class Reservas extends HttpServlet {
 			String fechaSelec = (fechaRes+" "+horaRes+":00");
 			
 			CtrlElemento ctrlElem = new CtrlElemento();
-			
-			
-			request.setAttribute("listaElementos", ctrlElem.buscarElemento(fechaSelec, nomTipo, tiempoUso));
-			
-			request.getRequestDispatcher("WEB-INF/buscarElem.jsp").forward(request, response);
-			
+			CtrlTipoElem ctrlTipo = new CtrlTipoElem();
 
+			String añoRes = fechaRes.substring(0, 4);
+			String mesRes = fechaRes.substring(5, 7);
+			String diaRes = fechaRes.substring(8, 10);
+			
 			Persona pers = (Persona) request.getSession().getAttribute("user");
 			
-			String detalle =request.getParameter("detalle");
+			request.setAttribute("nomTipo", nomTipo);
 			
-			
-			//nuevaRes.setDetalle(textDet);				
-			nuevaRes.setFechayhora(fechaSelec);
-			nuevaRes.setTiempoUso(tiempoUso);
-			nuevaRes.setTipo(new TipoElemento());
-			nuevaRes.getTipo().setNombreTipo(nomTipo);
-			nuevaRes.setPersona(new Persona());
-			nuevaRes.getPersona().setId(pers.getId());
-			nuevaRes.setDetalle(detalle);
+			if (!ctrlTipo.validarAntip(añoRes, mesRes, diaRes, nomTipo))
+			{
+				request.setAttribute("motivoError", "validarAntip");
+				request.getRequestDispatcher("WEB-INF/problemaRes.jsp").forward(request, response);
+				
+			} else { if(!ctrlTipo.validarCantMaxRes(nomTipo, pers.getId())){
+				
+						request.setAttribute("motivoError", "validarCantMaxRes");
+						request.getRequestDispatcher("WEB-INF/problemaRes.jsp").forward(request, response);
+				
+						} else { if(!ctrlTipo.validarEncarg(nomTipo, pers.getId())){
+							
+								request.setAttribute("motivoError", "validarEncarg");
+								request.getRequestDispatcher("WEB-INF/problemaRes.jsp").forward(request, response);
+							
+								} else { if(!ctrlTipo.tiempoUso(nomTipo, tiempoUso)){
+									
+									request.setAttribute("motivoError", "tiempoUso");
+									request.getRequestDispatcher("WEB-INF/problemaRes.jsp").forward(request, response);
+									
+										 } else {
+											 
+												
+
+												
+												String detalle =request.getParameter("detalle");
+												
+												
+												//nuevaRes.setDetalle(textDet);				
+												nuevaRes.setFechayhora(fechaSelec);
+												nuevaRes.setTiempoUso(tiempoUso);
+												nuevaRes.setTipo(new TipoElemento());
+												nuevaRes.getTipo().setNombreTipo(nomTipo);
+												nuevaRes.setPersona(new Persona());
+												nuevaRes.getPersona().setId(pers.getId());
+												nuevaRes.setDetalle(detalle);
+												
+												
+												request.setAttribute("listaElementos", ctrlElem.buscarElemento(fechaSelec, nomTipo, tiempoUso));
+												
+												request.getRequestDispatcher("WEB-INF/buscarElem.jsp").forward(request, response);
+											 
+										 }
+								 }
+						 }
+				
+			 }
+
+
 			
 
 			

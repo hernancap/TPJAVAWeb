@@ -260,6 +260,171 @@ public class CtrlTipoElem {
 		
 	}
 	
+	public boolean validarCantMaxRes(String teSelec, int id){
+		
+		int cantMaxTipo = 0;
+		int cantRes = 0;
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=Conexion.getInstancia().getConn().prepareStatement("select cantMaxRes from tipos where nombre = ?");
+			
+					stmt.setString(1, teSelec);
+					rs = stmt.executeQuery();
+					
+					if(rs != null){
+						while(rs.next()){
+							cantMaxTipo = rs.getInt("cantMaxRes");
+
+						}
+					}
+					
+					stmt=null;
+					rs=null;
+					
+					stmt=Conexion.getInstancia().getConn().prepareStatement("select idUsuario, nomTipo, count(nomTipo) cant "
+							+ "from reservas where now() < fechayhora group by idUsuario, nomTipo having idUsuario = ? and nomTipo = ?");
+					
+					stmt.setInt(1,  id);
+					stmt.setString(2, teSelec);
+					rs = stmt.executeQuery();
+
+					if(rs != null){
+						while(rs.next()){
+							
+							cantRes = rs.getInt("cant");
+
+						}
+					}
+				
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			Conexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+}
+		
+		if (cantRes < cantMaxTipo){
+			
+			return true;			
+		} else { return false;}
+			
+	}
+	
+	public boolean validarEncarg(String teSelec, int id) {
+		
+		String cat = null;
+		int soloEncarg = 0;
+		
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=Conexion.getInstancia().getConn().prepareStatement("select categoria from personas where idpersona = ?");
+			
+					stmt.setInt(1, id);
+					rs = stmt.executeQuery();
+					
+					if(rs != null){
+						while(rs.next()){
+							cat = rs.getString("categoria");
+
+						}
+					}
+					
+					stmt=null;
+					rs=null;
+					
+					stmt=Conexion.getInstancia().getConn().prepareStatement("select soloEncarg from tipos where nombre = ?");
+					
+					stmt.setString(1, teSelec);
+					rs = stmt.executeQuery();
+
+					if(rs != null){
+						while(rs.next()){
+							
+							soloEncarg = rs.getInt("soloEncarg");
+
+						}
+					}
+				
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			Conexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+}
+		
+		
+		if( cat.equals("Encargado") || soloEncarg == 0 ){
+			return true;					
+		} else {return false;}
+		
+		
+	}
+	
+	public boolean tiempoUso(String teSelec, int horasRes) {
+		
+		int horasMax = 0;
+		
+		PreparedStatement stmt=null;
+		ResultSet rs=null;
+		try {
+			stmt=Conexion.getInstancia().getConn().prepareStatement("select horasMax from tipos where nombre = ?");
+			
+					stmt.setString(1, teSelec);
+					rs = stmt.executeQuery();
+					
+					if(rs != null){
+						while(rs.next()){
+							horasMax = rs.getInt("horasMax");
+
+						}
+					}
+					
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+
+		try {
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+			Conexion.getInstancia().releaseConn();
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+}
+		
+		
+		if( horasMax >= horasRes || horasMax == 0){
+			return true;					
+		} else {return false;}
+		
+		
+	
+		
+	}
+	
 
 	
 }
