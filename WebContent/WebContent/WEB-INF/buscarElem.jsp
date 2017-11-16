@@ -18,14 +18,30 @@
 body {
     margin: 50px 50px ;
 }
+table, td {
+    border:1px solid black;
+}
 </style>
 </head>
 <body>
 
 <h2>Seleccionar elemento:</h2>
+
+
+
 <form action="reservas" method="post">
 
-<table>
+<table class="table table-striped" id="tabla">
+<thead>
+		<tr>
+        <th>Elemento</th>
+        <th>Seleccionar</th>
+     	</tr>
+	</thead>     
+
+	<tbody>
+
+
 		<%
 			ArrayList<Elemento>listaElem = (ArrayList<Elemento>)request.getAttribute("listaElementos");
 			for(Elemento e : listaElem){
@@ -44,7 +60,7 @@ body {
 		<%
 			}
 		%>
-
+    </tbody>
 </table>
 <div class="container">	
 <div class="col-sm-2">
@@ -54,6 +70,8 @@ body {
 <div class="col-sm-10">
 <button type="submit" formmethod="get" formaction="start" class="btn btn-info">Volver</button>
 </div>
+</div>
+
 
 
 </body>

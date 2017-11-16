@@ -30,6 +30,8 @@ body {
 <div class="container">
 
 	<h1>Agregar tipo de elemento</h1>
+	
+		<div class="panel panel-default">
 
 
 <form class="form-horizontal" name="agregarTipo" action="tipos" method="post" onsubmit="return checkvalue(this)">
@@ -221,6 +223,7 @@ function checkvalue() {
   </div>
 </form>
 
+</div>
 </div>
 
 

@@ -39,6 +39,7 @@ table, td {
         <th>usuario</th>
         <th>Contraseña</th>
         <th>Categoría</th>
+        <th>Seleccionar</th>
      	</tr>
 	</thead>     
 	
@@ -58,7 +59,7 @@ table, td {
      <td> <%=p.getDni() %></td>
      <td> <%=p.getNombre() %></td>
      <td> <%=p.getApellido() %></td>
-     <td> <%=p.getHabilitado() %></td>
+     <td> <%=p.getHabilitado()%></td>
      <td> <%=p.getUsuario() %></td>
      <td> <%=p.getContraseña() %></td>
      <td> <%=p.getCategoria()%></td>

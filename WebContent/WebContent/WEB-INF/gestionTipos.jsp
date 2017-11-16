@@ -37,6 +37,7 @@ table, td {
         <th>Horas Máx. de Reserva</th>
         <th>Máx. Días de Anticip.</th>
         <th>Solo Encargado</th>
+        <th>Seleccionar</th>
      	</tr>
 	</thead>     
 	

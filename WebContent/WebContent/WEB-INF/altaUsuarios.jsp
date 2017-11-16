@@ -30,6 +30,8 @@ body {
 <div class="container">
 
 	<h1>Agregar persona</h1>
+	
+		<div class="panel panel-default">
 
 
 <form class="form-horizontal" name="agregarPer" action="usuarios" method="post" onsubmit="return checkvalue(this)">
@@ -313,6 +315,7 @@ function checkvalue() {
   </div>
 </form>
 
+</div>
 </div>
 
 

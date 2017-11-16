@@ -34,6 +34,7 @@ table, td {
         <th>ID</th>
         <th>Nombre</th>
         <th>Tipo</th>
+        <th>Seleccionar</th>
      	</tr>
 	</thead>     
 	

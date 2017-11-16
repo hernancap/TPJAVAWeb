@@ -30,13 +30,14 @@ body {
 <div class="container">
 
 	<h1>Agregar elemento</h1>
+	
+		<div class="panel panel-default">
 
 
 <form class="form-horizontal" name="agregarElem" action="elementos" method="post" onsubmit="return checkvalue(this)">
 <script type="text/javascript">
 function checkvalue() { 
-    var mystring = document.getElementById('nombre').value;
-    if(!mystring.match(/\S/) || document.getElementById("nomTipo").value == "none") {
+    if(document.getElementById("nomTipo").value == "none") {
         alert ("Complete todos los campos");
         return false;
     } else {
@@ -136,7 +137,7 @@ function checkvalue() {
 </form>
 
 </div>
-
+</div>
 
 
 

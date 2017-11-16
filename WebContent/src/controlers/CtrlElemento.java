@@ -18,8 +18,6 @@ public class CtrlElemento {
 	
 private ArrayList<Elemento> elem;
 
-// falta: revisar alta de elemento cuando no se ingresa ningún nombre -----------------------------------------------------------------------
-
 	
 	public ArrayList<Elemento>  buscarElemento(String fechaSelec, String teSelec, int tiempoRes){
 		
@@ -160,6 +158,12 @@ private ArrayList<Elemento> elem;
 	}
 
 	public void nuevoElem(Elemento elem2, boolean editar) {
+		
+		if (elem2.getNombre().equals(""))
+		{
+			elem2.setNombre(elem2.getTipo().getNombreTipo());
+		}
+		
 		
 		if (editar == false){
 		
