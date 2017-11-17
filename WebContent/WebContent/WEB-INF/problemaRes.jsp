@@ -71,7 +71,15 @@ body {
 		
 		%>
 		
-		
+
+  		<button onclick="goBack()" class="btn btn-info">Volver</button>
+
+<script>
+function goBack() {
+    window.history.go(-1);
+}
+</script>
+
 
 </body>
 </html>

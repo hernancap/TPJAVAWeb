@@ -100,7 +100,7 @@ function checkvalue() {
   
      <div class="form-group">
      <label class="control-label col-sm-2" for="cantMaxRes">Cant. Máx. de Reservas:</label>
-     <div class="col-sm-10">
+     <div class="col-sm-2">
      
          <%	
     if (te.getIdTipo() != 0){
@@ -121,6 +121,13 @@ function checkvalue() {
          %>
  
     </div>
+    
+    <div class="col-sm-8">
+    
+    <a href="#" data-toggle="tooltip" data-placement="top" title="Sin límite = 0"> <img src="style/info-icon.png" /> </a>
+    
+    </div>
+    
   </div>
   
        <div class="form-group">
@@ -217,16 +224,30 @@ function checkvalue() {
   
  
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-2 col-sm-2">
       <button type="submit" name="param" value="agregarTipo" formmethod="post" formaction="tipos" class="btn btn-primary">Agregar Tipo</button>
     </div>
-  </div>
+
 </form>
 
+<div class="col-sm-8">
+  		<button onclick="goBack()" class="btn btn-info">Volver</button>
+</div>
+<script>
+function goBack() {
+    window.history.go(-1);
+}
+</script>
+
+  </div>
 </div>
 </div>
 
-
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
 
 
 </body>

@@ -116,10 +116,17 @@ function myFunction() {
 </form>
 
 
-		<div class="col-sm-8">
+		<div class="col-sm-2">
 		<form action="tipos" method="post">
 
   		<button type="submit" name="param" value="alta" formmethod="post" formaction="usuarios" class="btn btn-primary">Agregar Persona</button>
+		</form>
+</div>
+
+		<div class="col-sm-6">
+<form action="start" method="get">
+
+  		<button type="submit" formmethod="get" formaction="start" class="btn btn-info">Volver</button>
 		</form>
 </div>
 </div>

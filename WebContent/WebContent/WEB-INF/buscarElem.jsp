@@ -29,7 +29,7 @@ table, td {
 
 
 
-<form action="reservas" method="post">
+<form action="reservas" method="post" onsubmit="return myFunction(this)">
 
 <table class="table table-striped" id="tabla">
 <thead>
@@ -66,9 +66,29 @@ table, td {
 <div class="col-sm-2">
 <button type="submit" name="param" value="nuevaRes" formmethod="post" formaction="reservas" class="btn btn-primary">Reservar</button>
 </div>
+<script>
+function myFunction() {
+    var radios = document.getElementsByName("idElem");
+    var i;
+    var ID = null;
+    for (i = 0; i < radios.length; i++) {
+        if (radios[i].checked) {
+            ID = radios[i].value;
+        }
+    }
+    if (ID == null) { alert ("Seleccione un elemento");
+    						 return false;} else {
+    return true;; }
+}
+</script>
+
+
+
 </form>
 <div class="col-sm-10">
-<button type="submit" formmethod="get" formaction="start" class="btn btn-info">Volver</button>
+<form action="reservas" method="post">
+  		<button type="submit" name="param" value="welcome" formmethod="post" formaction="reservas" class="btn btn-info">Volver</button>
+  		</form>
 </div>
 </div>
 

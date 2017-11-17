@@ -130,11 +130,20 @@ function checkvalue() {
   
  
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-2">
       <button type="submit" name="param" value="agregarElem" formmethod="post" formaction="elementos" class="btn btn-primary">Agregar Elemento</button>
     </div>
   </div>
 </form>
+
+<div class="col-sm-10">
+  		<button onclick="goBack()" class="btn btn-info">Volver</button>
+</div>
+<script>
+function goBack() {
+    window.history.go(-1);
+}
+</script>
 
 </div>
 </div>

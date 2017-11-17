@@ -166,11 +166,19 @@ function checkvalue() {
         
   
 <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
+    <div class="col-sm-offset-2 col-sm-2">
       <button type="submit" name="param" value="buscarElem" formmethod="post" formaction="reservas" class="btn btn-primary">Buscar elementos</button>
     </div>
-  </div>
+
 </form>
+
+<div class="col-sm-8">
+<form action="start" method="get">
+
+  		<button type="submit" formmethod="get" formaction="start" class="btn btn-info">Volver</button>
+		</form></div>
+  </div>
+
 
 </div>
 
