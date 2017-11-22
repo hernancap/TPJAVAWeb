@@ -97,8 +97,16 @@ function myFunction() {
         }
     }
     if (ID == null) { alert ("Seleccione un elemento");
-    						 return false;} else {
-    return true;; }
+	 return false;
+	} 
+else 
+	{
+	if (confirm("¿Está seguro que desea eliminar este elemento?") == true) {
+		return true;
+		  } else {
+			 return false;
+			 }
+	 }
 }
 </script>
 

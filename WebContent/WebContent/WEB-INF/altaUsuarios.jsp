@@ -312,7 +312,6 @@ function checkvalue() {
     <div class="col-sm-offset-2 col-sm-2">
       <button type="submit" name="param" value="agregarPer" formmethod="post" formaction="usuarios" class="btn btn-primary">Agregar Persona</button>
     </div>
-  </div>
 </form>
 <div class="col-sm-8">
   		<button onclick="goBack()" class="btn btn-info">Volver</button>
@@ -325,6 +324,8 @@ function goBack() {
 
 </div>
 </div>
+  </div>
+
 
 
 

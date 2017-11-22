@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -34,7 +35,7 @@ public class CtrlReserva {
 		ResultSet rs=null;
 		ArrayList<Reserva> res= new ArrayList<Reserva>();
 		try {
-			stmt=Conexion.getInstancia().getConn().prepareStatement("select * from reservas");
+			stmt=Conexion.getInstancia().getConn().prepareStatement("select * from reservas where fechayhora >= NOW()");
 			rs = stmt.executeQuery();
 			if(rs!=null){
 				while(rs.next()){
@@ -67,8 +68,6 @@ public class CtrlReserva {
 			e.printStackTrace();
 }
 		
-
-		
 		return res;
 
 }
@@ -81,7 +80,7 @@ public class CtrlReserva {
 		ResultSet rs=null;
 		ArrayList<Reserva> res= new ArrayList<Reserva>();
 		try {
-			stmt=Conexion.getInstancia().getConn().prepareStatement("select * from reservas where idUsuario = ?");
+			stmt=Conexion.getInstancia().getConn().prepareStatement("select * from reservas where fechayhora >= NOW() and idUsuario = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			if(rs!=null){

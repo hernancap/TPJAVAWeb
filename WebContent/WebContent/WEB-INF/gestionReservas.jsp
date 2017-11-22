@@ -53,21 +53,6 @@ table, td {
 			CtrlReserva ctrlRes = new CtrlReserva();
 			ArrayList<Reserva>listaRes = ctrlRes.mostrarReservas();
 			
-			for (int x = 0; x < listaRes.size(); x++ )
-			{
-				
-				Date date = new Date();
-				String fechaRes = listaRes.get(x).getFechayhora();
-				DateFormat hourdateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				String fechaActual = hourdateFormat.format(date);
-				if( fechaRes.compareTo(fechaActual) < 0 )
-				{
-					listaRes.remove(x);
-				}
-					
-					
-			}
-			
 			for(Reserva r : listaRes){ 	
 		%>
 	
@@ -111,8 +96,16 @@ function myFunction() {
         }
     }
     if (ID == null) { alert ("Seleccione la reserva a eliminar");
-    						 return false;} else {
-    return true;; }
+	 return false;
+	} 
+else 
+	{
+	if (confirm("¿Está seguro que desea eliminar esta reserva?") == true) {
+		return true;
+		  } else {
+			 return false;
+			 }
+	 }
 }
 </script>
 

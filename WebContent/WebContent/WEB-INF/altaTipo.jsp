@@ -100,7 +100,7 @@ function checkvalue() {
   
      <div class="form-group">
      <label class="control-label col-sm-2" for="cantMaxRes">Cant. Máx. de Reservas:</label>
-     <div class="col-sm-2">
+     <div class="col-sm-10">
      
          <%	
     if (te.getIdTipo() != 0){
@@ -122,17 +122,12 @@ function checkvalue() {
  
     </div>
     
-    <div class="col-sm-8">
-    
-    <a href="#" data-toggle="tooltip" data-placement="top" title="Sin límite = 0"> <img src="style/info-icon.png" /> </a>
-    
-    </div>
     
   </div>
   
        <div class="form-group">
     <label class="control-label col-sm-2" for="horasMax">Horas Máx. de Reserva:</label>
-    <div class="col-sm-10">
+    <div class="col-sm-2">
     
              <%	
     if (te.getIdTipo() != 0){
@@ -153,11 +148,17 @@ function checkvalue() {
     
      
     </div>
+    
+        <div class="col-sm-8">
+    
+    <a href="#" data-toggle="tooltip" data-placement="top" title="Sin límite = 0"> <img src="style/info-icon.png" /> </a>
+    
+    </div>
   </div>
   
        <div class="form-group">
     <label class="control-label col-sm-2" for="diasAntic">Máx. Días de Anticip.:</label>
-    <div class="col-sm-10">
+    <div class="col-sm-2">
     
              <%	
     if (te.getIdTipo() != 0){
@@ -176,6 +177,12 @@ function checkvalue() {
     %>
     
      
+    </div>
+    
+        <div class="col-sm-8">
+    
+    <a href="#" data-toggle="tooltip" data-placement="top" title="Sin anticipación = 0"> <img src="style/info-icon.png" /> </a>
+    
     </div>
   </div>
   

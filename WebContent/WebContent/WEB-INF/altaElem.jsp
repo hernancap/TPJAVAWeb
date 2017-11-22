@@ -38,7 +38,7 @@ body {
 <script type="text/javascript">
 function checkvalue() { 
     if(document.getElementById("nomTipo").value == "none") {
-        alert ("Complete todos los campos");
+        alert ("Seleccione un Tipo de Elemento");
         return false;
     } else {
 		
@@ -130,13 +130,13 @@ function checkvalue() {
   
  
 <div class="form-group">
-    <div class="col-sm-2">
+    <div class="col-sm-offset-2 col-sm-2">
       <button type="submit" name="param" value="agregarElem" formmethod="post" formaction="elementos" class="btn btn-primary">Agregar Elemento</button>
     </div>
-  </div>
+
 </form>
 
-<div class="col-sm-10">
+<div class="col-sm-8">
   		<button onclick="goBack()" class="btn btn-info">Volver</button>
 </div>
 <script>
@@ -147,7 +147,7 @@ function goBack() {
 
 </div>
 </div>
-
+  </div>
 
 
 </body>

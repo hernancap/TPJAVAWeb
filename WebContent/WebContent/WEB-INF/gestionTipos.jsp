@@ -104,8 +104,16 @@ function myFunction() {
         }
     }
     if (ID == null) { alert ("Seleccione un tipo de elemento");
-    						 return false;} else {
-    return true;; }
+	 return false;
+	} 
+else 
+	{
+	if (confirm("¿Está seguro que desea eliminar este tipo de elemento?") == true) {
+		return true;
+		  } else {
+			 return false;
+			 }
+	 }
 }
 </script>
 

@@ -108,8 +108,16 @@ function myFunction() {
         }
     }
     if (ID == null) { alert ("Seleccione una persona");
-    						 return false;} else {
-    return true;; }
+	 return false;
+	} 
+else 
+	{
+	if (confirm("¿Está seguro que desea eliminar esta persona?") == true) {
+		return true;
+		  } else {
+			 return false;
+			 }
+	 }
 }
 </script>
 
