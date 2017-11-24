@@ -12,6 +12,7 @@ import data.Conexion;
 import entity.Persona;
 import entity.Reserva;
 import entity.TipoElemento;
+import util.AppDataException;
 
 public class CtrlPersona {
 	
@@ -65,7 +66,7 @@ public class CtrlPersona {
 					pers.add(p);
 				}
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			
 			e.printStackTrace();
 		}
@@ -102,7 +103,7 @@ public class CtrlPersona {
 			stmt.setInt(1, idPer);
 			stmt.executeUpdate();				
 				
-			} catch (SQLException e) {
+			} catch (SQLException | AppDataException e) {
 				e.printStackTrace();
 			}
 			try {
@@ -141,7 +142,7 @@ public class CtrlPersona {
 			if(keyResultSet!=null && keyResultSet.next()){
 				per.setId(keyResultSet.getInt(1));
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -177,7 +178,7 @@ public class CtrlPersona {
 
 				stmt.executeUpdate();
 
-				} catch (SQLException e) {
+				} catch (SQLException | AppDataException e) {
 					e.printStackTrace();
 				}
 				try {
@@ -228,7 +229,7 @@ public class CtrlPersona {
 			
 			}	
 			
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			e.printStackTrace();
 		}
 		
@@ -273,7 +274,7 @@ public class CtrlPersona {
 						
 			}	
 			
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			e.printStackTrace();
 		}
 		

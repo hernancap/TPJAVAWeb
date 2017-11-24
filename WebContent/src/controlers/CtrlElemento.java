@@ -1,6 +1,7 @@
 package controlers;
 
 import java.sql.PreparedStatement;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,13 +14,16 @@ import entity.Elemento;
 import entity.Persona;
 import entity.Reserva;
 import entity.TipoElemento;
+import util.AppDataException;
+
+import org.apache.logging.log4j.Level;
 
 public class CtrlElemento {
 	
 private ArrayList<Elemento> elem;
 
 	
-	public ArrayList<Elemento>  buscarElemento(String fechaSelec, String teSelec, int tiempoRes){
+	public ArrayList<Elemento>  buscarElemento(String fechaSelec, String teSelec, int tiempoRes) throws Exception{
 		
 		ArrayList<Elemento> elemDisp = new ArrayList<Elemento>();
 
@@ -55,7 +59,11 @@ private ArrayList<Elemento> elem;
 			
 		} catch (SQLException e) {
 			
-			e.printStackTrace();
+			AppDataException ade=new AppDataException(e, "Error al recuperar listado de Personas.\n"+e.getSQLState()+":"+e.getMessage(), Level.WARN);
+			throw ade;
+		} catch (AppDataException ade) {
+			// TODO Auto-generated catch block
+			throw ade;
 		}
 		
 
@@ -104,7 +112,7 @@ private ArrayList<Elemento> elem;
 					elem.add(el);
 				}
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			
 			e.printStackTrace();
 		}
@@ -142,7 +150,7 @@ private ArrayList<Elemento> elem;
 			stmt.setInt(1, idElem);
 			stmt.executeUpdate();				
 				
-			} catch (SQLException e) {
+			} catch (SQLException | AppDataException e) {
 				e.printStackTrace();
 			}
 			try {
@@ -185,7 +193,7 @@ private ArrayList<Elemento> elem;
 			if(keyResultSet!=null && keyResultSet.next()){
 				elem2.setIdElem(keyResultSet.getInt(1));
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -217,7 +225,7 @@ private ArrayList<Elemento> elem;
 
 				stmt.executeUpdate();
 
-				} catch (SQLException e) {
+				} catch (SQLException | AppDataException e) {
 					e.printStackTrace();
 				}
 				try {
@@ -257,7 +265,7 @@ private ArrayList<Elemento> elem;
 						
 			}	
 			
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			e.printStackTrace();
 		}
 		

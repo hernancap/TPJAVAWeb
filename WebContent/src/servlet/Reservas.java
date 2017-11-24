@@ -16,6 +16,7 @@ import entity.Elemento;
 import entity.Persona;
 import entity.Reserva;
 import entity.TipoElemento;
+import util.AppDataException;
 
 /**
  * Servlet implementation class Reservas
@@ -117,7 +118,13 @@ public class Reservas extends HttpServlet {
 												nuevaRes.setDetalle(detalle);
 												
 												
-												request.setAttribute("listaElementos", ctrlElem.buscarElemento(fechaSelec, nomTipo, tiempoUso));
+												try {
+													request.setAttribute("listaElementos", ctrlElem.buscarElemento(fechaSelec, nomTipo, tiempoUso));
+												} catch (AppDataException ade) {
+													request.setAttribute("Error", ade.getMessage());
+												} catch (Exception e) {
+													response.setStatus(502);
+									}
 												
 												request.getRequestDispatcher("WEB-INF/buscarElem.jsp").forward(request, response);
 											 

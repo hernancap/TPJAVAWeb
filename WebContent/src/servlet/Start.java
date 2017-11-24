@@ -10,18 +10,25 @@ import javax.servlet.http.HttpServletResponse;
 import controlers.CtrlPersona;
 import entity.Persona;
 
+import util.AppDataException;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Level;
+
 /**
  * Servlet implementation class Start
  */
 @WebServlet({ "/Start", "/start" })
 public class Start extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private Logger logger;
 
     /**
      * Default constructor. 
      */
     public Start() {
-        // TODO Auto-generated constructor stub
+    	logger = LogManager.getLogger(getClass());
     }
 
 	/**
@@ -59,6 +66,8 @@ public class Start extends HttpServlet {
 			//request.setAttribute("listaPersonas", ctrl.mostrarPersona());
 			
 			request.getSession().setAttribute("user", pers);
+			
+			logger.log(Level.INFO,"log in "+pers.getDni());
 			
 			if (pers.getHabilitado() == 1)
 				

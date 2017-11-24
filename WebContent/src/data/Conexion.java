@@ -1,6 +1,10 @@
 package data;
 import java.sql.*;
 
+import org.apache.logging.log4j.Level;
+
+import util.AppDataException;
+
 public class Conexion {
 	
 	private String driver="com.mysql.jdbc.Driver";
@@ -31,14 +35,14 @@ public class Conexion {
 	
 	private Connection conn;
 	private int cantConn=0;
-	public Connection getConn(){
+	public Connection getConn() throws SQLException,AppDataException{
 		try {
 			if(conn==null || conn.isClosed()){	
 				conn = DriverManager.getConnection(
 			        "jdbc:mysql://"+host+":"+port+"/"+db+"?user="+user+"&password="+password);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new AppDataException(e, "Error al conectar a la base de datos", Level.ERROR);
 		}
 		cantConn++;
 		System.out.println("Conectado");

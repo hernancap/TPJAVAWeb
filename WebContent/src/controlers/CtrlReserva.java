@@ -17,6 +17,7 @@ import entity.Elemento;
 import entity.Persona;
 import entity.Reserva;
 import entity.TipoElemento;
+import util.AppDataException;
 
 public class CtrlReserva {
 	
@@ -53,7 +54,7 @@ public class CtrlReserva {
 					res.add(r);
 				}
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			
 			e.printStackTrace();
 		}
@@ -99,7 +100,7 @@ public class CtrlReserva {
 					res.add(r);
 				}
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			
 			e.printStackTrace();
 		}
@@ -143,7 +144,7 @@ public class CtrlReserva {
 			if(keyResultSet!=null && keyResultSet.next()){
 				nuevaRes.setId(keyResultSet.getInt(1));
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -178,7 +179,7 @@ public class CtrlReserva {
 			stmt.setInt(1, ID);
 			stmt.executeUpdate();				
 				
-			} catch (SQLException e) {
+			} catch (SQLException | AppDataException e) {
 				e.printStackTrace();
 			}
 			try {

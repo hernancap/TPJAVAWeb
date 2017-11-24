@@ -16,6 +16,7 @@ import data.Conexion;
 import entity.Elemento;
 import entity.Persona;
 import entity.TipoElemento;
+import util.AppDataException;
 
 public class CtrlTipoElem {
 	
@@ -55,7 +56,7 @@ public class CtrlTipoElem {
 					tipos.add(te);
 				}
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			
 			e.printStackTrace();
 		}
@@ -128,7 +129,7 @@ public class CtrlTipoElem {
 			stmt.setInt(1, idTipo);
 			stmt.executeUpdate();				
 				
-			} catch (SQLException e) {
+			} catch (SQLException | AppDataException e) {
 				e.printStackTrace();
 			}
 			try {
@@ -167,7 +168,7 @@ public class CtrlTipoElem {
 			if(keyResultSet!=null && keyResultSet.next()){
 				tip.setIdTipo(keyResultSet.getInt(1));
 			}
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			e.printStackTrace();
 		}
 		try {
@@ -200,7 +201,7 @@ public class CtrlTipoElem {
 
 				stmt.executeUpdate();
 
-				} catch (SQLException e) {
+				} catch (SQLException | AppDataException e) {
 					e.printStackTrace();
 				}
 				try {
@@ -239,7 +240,7 @@ public class CtrlTipoElem {
 						
 			}	
 			
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			e.printStackTrace();
 		}
 		
@@ -298,7 +299,7 @@ public class CtrlTipoElem {
 					}
 				
 			
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			
 			e.printStackTrace();
 		}
@@ -357,7 +358,7 @@ public class CtrlTipoElem {
 					}
 				
 			
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			
 			e.printStackTrace();
 		}
@@ -400,7 +401,7 @@ public class CtrlTipoElem {
 					}
 					
 			
-		} catch (SQLException e) {
+		} catch (SQLException | AppDataException e) {
 			
 			e.printStackTrace();
 		}
