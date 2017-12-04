@@ -45,7 +45,6 @@ public class Conexion {
 			throw new AppDataException(e, "Error al conectar a la base de datos", Level.ERROR);
 		}
 		cantConn++;
-		System.out.println("Conectado");
 		return conn;
 	}
 	

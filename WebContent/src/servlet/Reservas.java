@@ -17,6 +17,7 @@ import entity.Persona;
 import entity.Reserva;
 import entity.TipoElemento;
 import util.AppDataException;
+import util.Emailer;
 
 /**
  * Servlet implementation class Reservas
@@ -45,6 +46,14 @@ public class Reservas extends HttpServlet {
 		CtrlReserva ctrlRes = new CtrlReserva();
 		
 		ctrlRes.eliminarRes(idRes);
+		
+		ctrlRes.eliminarRes(idRes);
+		
+		try {
+			Emailer.getInstance().send("hernancaparros@hotmail.com","Reserva cancelada",ctrlRes.textoEliminarRes(idRes));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		request.getRequestDispatcher("WEB-INF/eliminarReserva.jsp").forward(request, response);
 	}
@@ -151,6 +160,12 @@ public class Reservas extends HttpServlet {
 				
 				
 				ctrlRes.nuevaReserva(nuevaRes);
+				
+				try {
+					Emailer.getInstance().send("hernancaparros@hotmail.com","Nueva reserva realizada",ctrlRes.textoReserva(nuevaRes));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 				
 				request.getRequestDispatcher("WEB-INF/confirmarReserva.jsp").forward(request, response);
 				

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controlers.CtrlReserva;
 import entity.Persona;
+import util.Emailer;
 
 /**
  * Servlet implementation class GestionReservas
@@ -66,12 +67,18 @@ public class GestionReservas extends HttpServlet {
 		//redirigir a página de error
 	}
 	private void baja(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through post");
+		//response.getWriter().append("baja, requested action: ").append(request.getPathInfo()).append(" through post");
 int idRes = Integer.parseInt(request.getParameter("idRes"));
 		
 		CtrlReserva ctrlRes = new CtrlReserva();
 		
 		ctrlRes.eliminarRes(idRes);
+		
+		try {
+			Emailer.getInstance().send("hernancaparros@hotmail.com","Reserva cancelada",ctrlRes.textoEliminarRes(idRes));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		try {
 			request.getRequestDispatcher("WEB-INF/eliminarReserva.jsp").forward(request, response);

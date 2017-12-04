@@ -189,21 +189,24 @@ public class CtrlReserva {
 				e.printStackTrace();
 			}
 
-
-			
-
-
-	
-    
-     
-
-
-		
-		
-		
-		
 		
 		
 	}
+	
+	public String textoReserva(Reserva r) throws Exception {
+		String texto="ID\tTipo\tID Elemento\tFecha y Hora\tTiempo de Uso (hs)\tDetalle\n";
 
+
+			texto= texto + r.getId() +"\t"+ r.getTipo().getNombreTipo() +"\t"+ r.getElemento().getIdElem() +"\t"+
+			r.getFechayhora()+"\t"+r.getTiempoUso()+"\t"+r.getDetalle();
+
+		return texto;
+	}
+	
+	public String textoEliminarRes(int id) throws Exception {
+		String texto="La Reserva con el ID: "+id+" fué cancelada.";
+
+		return texto;
+	}
+	
 }
