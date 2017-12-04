@@ -28,7 +28,7 @@ CREATE TABLE `elementos` (
   `tipoElem` varchar(45) NOT NULL,
   PRIMARY KEY (`idelemento`),
   KEY `a_idx` (`tipoElem`),
-  CONSTRAINT `a` FOREIGN KEY (`tipoElem`) REFERENCES `tipos` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `a` FOREIGN KEY (`tipoElem`) REFERENCES `tipos` (`nombre`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +38,7 @@ CREATE TABLE `elementos` (
 
 LOCK TABLES `elementos` WRITE;
 /*!40000 ALTER TABLE `elementos` DISABLE KEYS */;
-INSERT INTO `elementos` VALUES (1,'Sony VPL-HW40ES','Proyector'),(2,'Philips PPX3411','Proyector'),(3,'Epson EH-TW5200','Proyector'),(4,'Epson EB-S03','Proyector'),(5,'Macbook Pro 13.3','Notebook'),(6,'Lenovo I5','Notebook'),(7,'Asus I3','Notebook'),(8,'Dell Inspiron','Notebook'),(9,'Cochera 03','Cochera'),(10,'Cochera 04','Cochera'),(11,'Cochera 05','Cochera'),(12,'Cochera 06','Cochera'),(13,'Multifunción EPSON XP-241','Impresora'),(14,'Laser Samsung SL-M2020W/XBG','Impresora'),(15,'Laser Brother DCP-1617NW','Impresora'),(16,'Multifunción HP DESKJET 2135','Impresora'),(17,'Aula 110','Aula'),(18,'Aula 210','Aula'),(19,'Laboratorio Física','Aula'),(20,'Sala de computación','Aula');
+INSERT INTO `elementos` VALUES (1,'Sony VPL-HW40ES','Proyector'),(2,'Philips PPX3411','Proyector'),(3,'Epson EH-TW5200','Proyector'),(4,'Epson EB-S03','Proyector'),(5,'Macbook Pro 13.3','Notebook'),(6,'Lenovo I5','Notebook'),(7,'Asus I3','Notebook'),(8,'Dell Inspiron','Notebook'),(9,'Cochera 03','Cochera'),(10,'Cochera 04','Cochera'),(11,'Cochera 05','Cochera'),(13,'Multifunción EPSON XP-241','Impresora'),(14,'Laser Samsung SL-M2020W/XBG','Impresora'),(15,'Laser Brother DCP-1617NW','Impresora'),(16,'Multifunción HP DESKJET 2135','Impresora'),(17,'Aula 110','Aula'),(18,'Aula 210','Aula'),(19,'Laboratorio Física','Aula'),(20,'Sala de computación','Aula');
 /*!40000 ALTER TABLE `elementos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -60,7 +60,7 @@ CREATE TABLE `personas` (
   `categoria` varchar(45) NOT NULL,
   PRIMARY KEY (`idpersona`),
   UNIQUE KEY `idpersona_UNIQUE` (`idpersona`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,10 +92,10 @@ CREATE TABLE `reservas` (
   KEY `t_idx` (`nomTipo`),
   KEY `u_idx` (`idUsuario`),
   KEY `e_idx` (`idElementos`),
-  CONSTRAINT `e` FOREIGN KEY (`idElementos`) REFERENCES `elementos` (`idelemento`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `t` FOREIGN KEY (`nomTipo`) REFERENCES `tipos` (`nombre`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `u` FOREIGN KEY (`idUsuario`) REFERENCES `personas` (`idpersona`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+  CONSTRAINT `e` FOREIGN KEY (`idElementos`) REFERENCES `elementos` (`idelemento`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `t` FOREIGN KEY (`nomTipo`) REFERENCES `tipos` (`nombre`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `u` FOREIGN KEY (`idUsuario`) REFERENCES `personas` (`idpersona`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -104,7 +104,7 @@ CREATE TABLE `reservas` (
 
 LOCK TABLES `reservas` WRITE;
 /*!40000 ALTER TABLE `reservas` DISABLE KEYS */;
-INSERT INTO `reservas` VALUES (1,'Cochera',11,'2017-12-18 07:00:00',168,4,'Reserva Decano Fin de Año'),(2,'Impresora',13,'2017-11-01 10:00:00',2,1,NULL),(3,'Impresora',13,'2017-11-08 10:00:00',2,1,NULL),(6,'Aula',20,'2017-11-10 18:00:00',2,3,'Clase Java'),(7,'Aula',18,'2017-10-27 19:00:00',4,3,'Parcial'),(8,'Notebook',5,'2017-06-15 10:00:00',1,1,NULL);
+INSERT INTO `reservas` VALUES (1,'Cochera',11,'2017-12-18 07:00:00',168,4,'Reserva Decano Fin de Año'),(2,'Impresora',13,'2017-11-01 10:00:00',2,1,NULL),(3,'Impresora',13,'2017-11-08 10:00:00',2,1,NULL),(6,'Aula',20,'2017-11-10 18:00:00',2,3,'Clase Java'),(8,'Notebook',5,'2017-06-15 10:00:00',1,1,NULL),(16,'Cochera',11,'2018-02-08 20:00:00',10,3,NULL),(24,'Cochera',11,'2017-11-30 16:00:00',10,3,NULL),(26,'Cochera',10,'2017-11-30 14:00:00',10,3,'asdasdasd'),(30,'Aula',17,'2017-11-22 06:00:00',1,3,'a'),(34,'Aula',18,'2017-11-22 06:00:00',1,3,''),(35,'Aula',19,'2017-11-22 06:00:00',1,3,''),(36,'Aula',20,'2017-11-22 06:00:00',1,3,''),(38,'Aula',17,'2017-12-16 08:00:00',2,3,''),(39,'Impresora',16,'2017-12-04 10:00:00',1,3,''),(40,'Proyector',4,'2018-01-29 10:00:00',1,3,''),(44,'Cochera',10,'2018-01-22 07:00:00',12,3,'Cochera para Enero 2018.');
 /*!40000 ALTER TABLE `reservas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -124,7 +124,7 @@ CREATE TABLE `tipos` (
   `soloEncarg` tinyint(1) NOT NULL,
   PRIMARY KEY (`idtipo`),
   UNIQUE KEY `nombre_UNIQUE` (`nombre`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -133,7 +133,7 @@ CREATE TABLE `tipos` (
 
 LOCK TABLES `tipos` WRITE;
 /*!40000 ALTER TABLE `tipos` DISABLE KEYS */;
-INSERT INTO `tipos` VALUES (1,'Proyector',3,3,21,0),(2,'Notebook',1,0,28,1),(3,'Cochera',2,0,0,0),(4,'Impresora',2,0,0,0),(5,'Aula',2,3,0,0),(7,'Pruebaa',5,4,4,0);
+INSERT INTO `tipos` VALUES (1,'Proyector',3,3,21,0),(2,'Notebook',1,0,28,1),(3,'Cochera',2,0,0,0),(4,'Impresora',2,0,0,0),(5,'Aula',2,3,0,0);
 /*!40000 ALTER TABLE `tipos` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -146,4 +146,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-29  3:07:56
+-- Dump completed on 2017-12-04  5:00:08
